@@ -1,0 +1,37 @@
+plugins {
+    id "java"
+    id "application"
+}
+
+mainClassName = "gcj.y2017.qualification.OversizedPancakeFlipper"
+
+dependencies {
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:5.2.0"
+    testImplementation "org.junit.platform:junit-platform-launcher:1.2.0"
+}
+
+repositories {
+    mavenCentral()
+}
+
+run {
+    // This allows to pass arguments to the app from the command line:
+    //
+    //     ./gradlew run -Pi=path/to/input/file -Po=path/to/output/file
+    //
+    if (project.hasProperty("i") &&
+            project.hasProperty("o")) {
+        args = ["-i=" + project.getProperty("i"),
+                "-o=" + project.getProperty("o")]
+    }
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+    reports {
+        html.enabled = true
+    }
+}
