@@ -6,6 +6,7 @@ plugins {
 mainClassName = "gcj.y2017.qualification.OversizedPancakeFlipper"
 
 dependencies {
+    implementation "org.reflections:reflections:0.9.11"
     testImplementation "org.junit.jupiter:junit-jupiter-engine:5.2.0"
     testImplementation "org.junit.platform:junit-platform-launcher:1.2.0"
 }
@@ -17,11 +18,13 @@ repositories {
 run {
     // This allows to pass arguments to the app from the command line:
     //
-    //     ./gradlew run -Pi=path/to/input/file -Po=path/to/output/file
+    //     ./gradlew run -Pp=ProblemTitle -Pi=path/to/input/file -Po=path/to/output/file
     //
-    if (project.hasProperty("i") &&
+    if (project.hasProperty("p") &&
+            project.hasProperty("i") &&
             project.hasProperty("o")) {
-        args = ["-i=" + project.getProperty("i"),
+        args = ["-p=" + project.getProperty("p"),
+                "-i=" + project.getProperty("i"),
                 "-o=" + project.getProperty("o")]
     }
 }

@@ -4,20 +4,20 @@ import org.junit.jupiter.api.Test;
 
 import gcj.GcjTest;
 
-public class OversizedPancakeFlipperTest extends GcjTest {
+public class TidyNumbersTest extends GcjTest {
 	
 	@Test
 	public void testExample() throws Exception {
-		test(new OversizedPancakeFlipper(), "A-example");
+		test(new TidyNumbers(), "B-example");
 	}
 	
 	@Test
 	public void testSmallPractice() throws Exception {
-		test(new OversizedPancakeFlipper(), "A-small-practice");
+		test(new TidyNumbers(), "B-small-practice");
 	}
 	
 	@Test
 	public void testLargePractice() throws Exception {
-		test(new OversizedPancakeFlipper(), "A-large-practice");
+		test(new TidyNumbers(), "B-large-practice");
 	}
 }
