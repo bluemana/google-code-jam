@@ -1,26 +1,46 @@
 package gcj;
 
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+
 import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.StringWriter;
+import java.net.URL;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-public class GcjTest {
+public abstract class GcjTest {
+	
+	public abstract Gcj createGcjInstance();
+	
+	@Test
+	public void testExample() throws Exception {
+		test(createGcjInstance(), "example");
+	}
+	
+	@Test
+	public void testSmallPractice() throws Exception {
+		test(createGcjInstance(), "small-practice");
+	}
+	
+	@Test
+	public void testLargePractice() throws Exception {
+		test(createGcjInstance(), "large-practice");
+	}
 
-	protected static void test(Gcj gcj, String resourcePrefix) throws Exception {
-		try (BufferedReader inputReader = getResourceReader(gcj, resourcePrefix + ".in");
-				BufferedReader expectedReader = getResourceReader(gcj, resourcePrefix + ".out")) {
+	protected static void test(Gcj gcj, String resourceName) throws Exception {
+		String resourcePrefix = gcj.getProblemLetter() + "-" + resourceName;
+		URL inputUrl = gcj.getClass().getResource(resourcePrefix + ".in");
+		URL expectedUrl = gcj.getClass().getResource(resourcePrefix + ".out");
+		assumeTrue(inputUrl != null && expectedUrl != null, "Resource file(s) not found");
+		try (BufferedReader inputReader = new BufferedReader(new FileReader(new File(inputUrl.toURI())));
+				BufferedReader expectedReader = new BufferedReader(new FileReader(new File(expectedUrl.toURI())))) {
 			StringWriter writer = new StringWriter();
 			gcj.solve(inputReader, writer);
 			assertEquals(expectedReader, writer);
 		}
-	}
-	
-	private static BufferedReader getResourceReader(Gcj gcj, String resourceName) {
-		InputStream inputStream = gcj.getClass().getResourceAsStream(resourceName);
-		return new BufferedReader(new InputStreamReader(inputStream));
 	}
 	
 	private static void assertEquals(BufferedReader expectedReader, StringWriter actual) throws Exception {

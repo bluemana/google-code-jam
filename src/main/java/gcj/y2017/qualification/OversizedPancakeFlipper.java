@@ -6,6 +6,11 @@ import java.io.Writer;
 import gcj.Gcj;
 
 public class OversizedPancakeFlipper extends Gcj {
+	
+	@Override
+	public String getProblemLetter() {
+		return "A";
+	}
 
 	@Override
     public String solveTestCase(BufferedReader reader, Writer writer) throws Exception {
