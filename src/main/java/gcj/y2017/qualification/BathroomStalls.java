@@ -1,22 +1,31 @@
 package gcj.y2017.qualification;
 
-import java.io.BufferedReader;
-import java.io.Writer;
+import java.io.*;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import gcj.Gcj;
-
-public class BathroomStalls extends Gcj {
+public class BathroomStalls {
 	
-	@Override
-	public String getProblemLetter() {
-		return "C";
+	public static final String PROBLEM_LETTER = "C";
+
+	public static void main(String[] args) throws Exception {
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			 Writer writer = new BufferedWriter(new OutputStreamWriter(System.out))) {
+			solve(reader, writer);
+		}
 	}
 
-	@Override
-	public String solveTestCase(BufferedReader reader, Writer writer) throws Exception {
+	public static void solve(BufferedReader reader, Writer writer) throws Exception {
+		int testCasesCount = Integer.parseInt(reader.readLine());
+		for (int t = 0; t < testCasesCount; t++) {
+			String result = solveTestCase(reader);
+			writer.write(String.format("Case #%d: %s\n", (t + 1), result));
+		}
+		writer.flush();
+	}
+
+	private static String solveTestCase(BufferedReader reader) throws Exception {
 		String[] tokens = reader.readLine().split(" ");
 		long n = Long.parseLong(tokens[0]);
 		long k = Long.parseLong(tokens[1]);

@@ -1,12 +1,9 @@
 plugins {
     id "java"
-    id "application"
 }
 
 sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
-
-mainClassName = "gcj.Main"
 
 dependencies {
     implementation "org.reflections:reflections:0.9.11"
@@ -16,20 +13,6 @@ dependencies {
 
 repositories {
     mavenCentral()
-}
-
-run {
-    // This allows to pass arguments to the app from the command line:
-    //
-    //     ./gradlew run -Pp=ProblemTitle -Pi=path/to/input/file -Po=path/to/output/file
-    //
-    if (project.hasProperty("p") &&
-            project.hasProperty("i") &&
-            project.hasProperty("o")) {
-        args = ["-p=" + project.getProperty("p"),
-                "-i=" + project.getProperty("i"),
-                "-o=" + project.getProperty("o")]
-    }
 }
 
 test {

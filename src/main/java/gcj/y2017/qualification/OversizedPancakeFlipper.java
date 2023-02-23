@@ -1,19 +1,28 @@
 package gcj.y2017.qualification;
 
-import java.io.BufferedReader;
-import java.io.Writer;
+import java.io.*;
 
-import gcj.Gcj;
-
-public class OversizedPancakeFlipper extends Gcj {
+public class OversizedPancakeFlipper {
 	
-	@Override
-	public String getProblemLetter() {
-		return "A";
+	public static final String PROBLEM_LETTER = "A";
+
+	public static void main(String[] args) throws Exception {
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+				Writer writer = new BufferedWriter(new OutputStreamWriter(System.out))) {
+			solve(reader, writer);
+		}
 	}
 
-	@Override
-    public String solveTestCase(BufferedReader reader, Writer writer) throws Exception {
+	public static void solve(BufferedReader reader, Writer writer) throws Exception {
+		int testCasesCount = Integer.parseInt(reader.readLine());
+		for (int t = 0; t < testCasesCount; t++) {
+			String result = solveTestCase(reader);
+			writer.write(String.format("Case #%d: %s\n", (t + 1), result));
+		}
+		writer.flush();
+	}
+
+    private static String solveTestCase(BufferedReader reader) throws Exception {
         // Parse input
         String[] tokens = reader.readLine().split(" ");
         String pancakesRow = tokens[0];
